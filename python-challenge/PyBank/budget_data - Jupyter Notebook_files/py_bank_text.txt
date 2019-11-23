@@ -1,0 +1,93 @@
+
+import pandas as pd
+
+import pandas as pd
+?
+# Reference the file where the CSV is located
+budget_path_csv = "budget_data.csv"
+?
+# Import the data into a Pandas DataFrame
+budget_df = pd.read_csv(budget_path_csv)
+budget_df.head()
+Date	Profit/Losses
+0	Jan-2010	867884
+1	Feb-2010	984655
+2	Mar-2010	322013
+3	Apr-2010	-69417
+4	May-2010	310503
+budget_df.count()
+?
+Date             86
+Profit/Losses    86
+dtype: int64
+budget_df.columns
+?
+Index(['Date', 'Profit/Losses'], dtype='object')
+budget_df.rename(columns= {'Date':'Month-Year'})
+Month-Year	Profit/Losses
+0	Jan-2010	867884
+1	Feb-2010	984655
+2	Mar-2010	322013
+3	Apr-2010	-69417
+4	May-2010	310503
+...	...	...
+81	Oct-2016	102685
+82	Nov-2016	795914
+83	Dec-2016	60988
+84	Jan-2017	138230
+85	Feb-2017	671099
+86 rows × 2 columns
+
+)
+budget_df["Date"].count()
+?
+86
+Total_Months_count
+Total_Months_count = budget_df["Date"].count()
+print(Total_Months_count)
+86
+Profit/Losses
+Total = budget_df["Profit/Losses"].sum()
+?
+Greatest_Decrease= budget_df["Profit/Losses"].min()
+print("$",Total)
+$ 38382578
+"Difference"]
+Difference= budget_df["Profit/Losses"].diff(+1)
+budget_df["Difference"]=Difference
+budget_df.head()
+?
+Date	Profit/Losses	Difference
+0	Jan-2010	867884	NaN
+1	Feb-2010	984655	116771.0
+2	Mar-2010	322013	-662642.0
+3	Apr-2010	-69417	-391430.0
+4	May-2010	310503	379920.0
+Greatest_Increase
+Greatest_Increase = budget_df["Difference"].max()
+print("$",Greatest_Increase, budget_df.loc[budget_df["Difference"]==1926159,"Date"])
+$ 1926159.0 25    Feb-2012
+Name: Date, dtype: object
+Greatest_Decrease= budget_df["Difference"].min()
+print("$",Greatest_Decrease, budget_df.loc[budget_df["Difference"]==-2196167,"Date"])
+Greatest_Decrease= budget_df["Difference"].min()
+print("$",Greatest_Decrease, budget_df.loc[budget_df["Difference"]==-2196167,"Date"])
+$ -2196167.0 44    Sep-2013
+Name: Date, dtype: object
+Average_Change
+Average_Change= budget_df["Difference"].mean()
+Average_Change=round(int(Average_Change))
+print("$",Average_Change)
+$ -2315
+print("Financial_Analysis")
+print("-------------------")
+print(f"Total Months:{(Total_Months_count)}")
+print(f"Average Change:{(Average_Change)}")
+print(f"Greatest Increase:{(Greatest_Increase)}")
+print(f"Greatest Decrease:{(Greatest_Decrease)}")
+Financial_Analysis
+-------------------
+Total Months:86
+Average Change:-2315
+Greatest Increase:1926159.0
+Greatest Decrease:-2196167.0
